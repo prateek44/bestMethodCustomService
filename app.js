@@ -2,7 +2,16 @@
 {
   angular.module('shoppingListApp',[])
   .controller('shoppingListAppController',shoppingListAppController)
-  .provider('shoppingListService',shoppingListServiceProvider);
+  .provider('shoppingListService',shoppingListServiceProvider)
+  .config(Config);
+  Config.$inject=['shoppingListServiceProvider'];
+  function Config(shoppingListServiceProvider)
+  {
+    console.log('Config function called');
+    var config=this;
+    shoppingListServiceProvider.defaults.maxitems=2;
+
+  }
   shoppingListAppController.$inject=['shoppingListService'];
   function shoppingListAppController(shoppingListService)
   {
