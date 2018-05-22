@@ -9,6 +9,14 @@
     <br>
     <br>
     <button type="text" ng-click="list.addToList();">ADD</button>
+    <br>
+    <br>
+    <ol>
+      <li ng-repeat="item in list.addedItemsList">{{item}}</li>
+    </ol>
+    <br>
+    <br>
+    {{list.message}}
   </div>
 
 </body>

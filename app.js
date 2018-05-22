@@ -6,11 +6,23 @@
   shoppingListAppController.$inject=['shoppingListService'];
   function shoppingListAppController(shoppingListService)
   {
+    console.log('shoppingListAppController');
     var list=this;
+    list.addedItemsList="";
     list.addToList=function()
     {
-      shoppingListServiceProvider.addToList(list.currentItem)
-    }
+      try {
+        list.addedItemsList=shoppingListService.addToList(list.currentItem);
+
+      } catch (e) {
+        console.log('catch block');
+        list.message=e.message;
+
+      } finally {
+
+      }
+
+    };
 
   }
   function shoppingListServiceProvider()
@@ -35,7 +47,7 @@
     {
 
       console.log('adding current item to the list',currentItem);
-      if(listAddedItems.length<=maxitems)
+      if(listAddedItems.length<maxitems)
       {
         listAddedItems.push(currentItem);
         console.log('item added successfully');
@@ -44,10 +56,9 @@
       else
       {
         console.log('maximum item count reached',maxitems);
+        throw new Error("maximum item count reached");
       }
-
-
-
+      return listAddedItems;
     };
   }
 
